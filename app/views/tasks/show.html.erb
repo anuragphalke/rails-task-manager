@@ -1,8 +1,22 @@
-<h1>Task Details</h1>
+<br><br><h1 class="text-center">Task Details</h1><br>
 
-<p><b>Task:</b> <%= @task.title %></p>
-<p><b>Description:</b> <%= @task.details %></p>
-<p><b>Completed:</b> <%= @task.completed ? "Yes" : "No" %></p>
+<div class="d-flex justify-content-center flex-column align-items-center w-50 mx-auto">
+  <div class="mb-2 w-100">
+    <%= button_tag @task.title, class: 'btn btn-dark w-100 text-start' %>
+  </div>
 
-<%= link_to 'Edit', edit_path %>
-<%= link_to 'Back to Tasks', list_path %>
+  <div class="mb-2 w-100">
+    <%= button_tag @task.details, class: 'btn btn-light w-100 text-start' %>
+  </div>
+
+  <div class="mb-2 w-100">
+    <%= button_tag @task.completed ? "Completed" : "To Do", class: "btn #{@task.completed ? 'btn-success' : 'btn-danger'} w-100 text-start" %>
+  </div>
+
+  <div class="mt-3 d-flex justify-content-between w-50">
+    <%= link_to 'Edit', edit_path(@task), class: 'btn btn-warning text-center' %>
+    <%= link_to 'Delete', destroy_path(@task), method: :delete, class: 'btn btn-danger text-center' %>
+    <%= link_to 'Back', list_path, class: 'btn btn-secondary text-center' %>
+  </div>
+
+</div>

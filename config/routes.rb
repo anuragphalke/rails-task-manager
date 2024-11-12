@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get 'list', to: 'tasks#list', as: 'tasks'
   post 'list', to: 'tasks#create'
   patch 'list/:id', to: 'tasks#update', as: 'update'
+  delete 'list/:id', to: 'tasks#destroy', as: 'destroy'
 end

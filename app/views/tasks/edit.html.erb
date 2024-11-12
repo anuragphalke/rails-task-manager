@@ -1,24 +1,44 @@
-<h1>Edit Task</h1>
+<br><br><h1 class="text-center">Edit Task</h1><br>
 
-<%= form_with model: @task do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+<div class="w-50 mx-auto">
+  <%= form_with model: @task, local: true do |form| %>
+    <div class="mb-3 w-100">
+      <%= tag.button form.label(:title), class: 'btn btn-dark w-100 text-start', type: 'button' %>
+      <%= form.text_field :title, class: 'form-control mt-2 w-100' %>
+    </div>
 
-  <div>
-    <%= form.label :details %>
-    <%= form.text_area :details %>
-  </div>
+    <div class="mb-3 w-100">
+      <%= tag.button form.label(:details), class: 'btn btn-secondary w-100 text-start', type: 'button' %>
+      <%= form.text_area :details, class: 'form-control mt-2 w-100' %>
+    </div>
 
-  <div>
-    <%= form.label :completed %>
-    <%= form.check_box :completed %>
-  </div>
+    <div class="mb-3 w-100">
+      <%= button_tag @task.completed ? 'Completed' : 'To Do', class: "btn #{@task.completed ? 'btn-success' : 'btn-danger'} w-100", type: 'button', id: 'toggle-completed' %>
+      <%= form.hidden_field :completed, value: @task.completed %>
 
-  <div>
-    <%= form.submit 'Update Task' %>
-  </div>
-<% end %>
+    <div class="mb-3 d-flex justify-content-between w-25 mx-auto">
+      <%= form.submit 'Done', class: 'btn btn-primary ' %>
 
-<%= link_to 'Back to Task', task_path(@task) %>
+      <%= link_to 'Back', task_path(@task), class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.getElementById('toggle-completed').addEventListener('click', function() {
+    var button = this;
+    var completedField = document.querySelector('input[name="task[completed]"]');
+
+    if (button.classList.contains('btn-danger')) {
+      button.classList.remove('btn-danger');
+      button.classList.add('btn-success');
+      button.textContent = 'Completed';
+      completedField.value = 'true';
+    } else {
+      button.classList.remove('btn-success');
+      button.classList.add('btn-danger');
+      button.textContent = 'To Do';
+      completedField.value = 'false';
+    }
+  });
+</script>

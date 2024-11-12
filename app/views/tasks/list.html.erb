@@ -1,12 +1,11 @@
-<h1>All Tasks</h1>
+<br><br><h1 class="text-center">All Tasks</h1><br>
 
-<ul>
+<div class="d-flex justify-content-center flex-column align-items-center w-50 mx-auto">
   <% @tasks.each do |task| %>
-    <li>
-      <%= check_box_tag "task_#{task.id}_completed", task.completed, task.completed %>
-      <b><%= link_to task.title, task_path(task) %></b>
-    </li>
+    <div class="mb-2 w-100">
+      <%= link_to task.title, task_path(task), class: "btn #{task.completed ? 'btn-success' : 'btn-danger'} text-start w-100" %>
+    </div>
   <% end %>
-</ul>
 
-<%= link_to 'Create New Task', new_path %>
+  <br><strong><%= link_to 'Add', new_path, class: 'btn btn-primary text-center' %></strong>
+</div>
